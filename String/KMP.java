@@ -20,13 +20,18 @@ public class KMP {
 
     private void calculate(String s, String p, int[] lps){
         int i=0,j=0;
-        while (i<s.length() || j!=p.length()){
-            if(s.charAt(j) == p.charAt(j)){
-                j++; j++;
+        while (i<s.length()){
+            if(s.charAt(i) == p.charAt(j)){
+                i++; j++;
             } else {
+                if (j > 0) {
+                    j = lps[j - 1];
+                }
+                i++;
             }
-            if(p.length()-1 == j){
-                System.out.println("pattern found at "+ i);
+            if(p.length() == j){
+                System.out.println("pattern found at "+ (i - p.length()));
+                j = lps[j-1];
             }
         }
     }

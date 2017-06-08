@@ -45,7 +45,6 @@ public class LPS {
             } else {
                 lps[i] = 0;
                 i++;
-                break;
             }
         }
         return lps;
