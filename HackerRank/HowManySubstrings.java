@@ -17,25 +17,52 @@ public class HowManySubstrings {
         for(int a0 = 0; a0 < q; a0++) {
             int left = in.nextInt();
             int right = in.nextInt();
-//        }
-//            for (int i=left;i<=right;i++){
-//                for (int j=i;j<=right;j++){
-//                    if(s.length()>=right && !arrayList.contains(s.substring(i,j+1))){
-//                        arrayList.add(s.substring(i,j+1));
-//                    }
-//                }
-////                arrayListCount.add(arrayList.size());
-////                arrayList.clear();
-//            }
-//            arrayListCount.add(arrayList.size());
-//            arrayList.clear();
-//        }
-//
-//        for (int i:arrayListCount) {
-//            System.out.println(i);
+            new HowManySubstrings().solution(s.substring(left,right+1));
         }
     }
 
-    private void solution(String s,int left,int right){
+    private void solution(String s){
+        int res = calculateLPS(s);
+        int total = (s.length() * (s.length() + 1)) / 2;
+        System.out.println(total - res);
+    }
+
+    private int calculateLPS(String pattern){
+        int[] lps = new int[pattern.length()];
+        int j=0,i=1;
+        lps[0]=0;
+        while (i<pattern.length()){
+            if(pattern.charAt(j) == pattern.charAt(i)){
+                lps[i] = lps[i-1] + 1;
+                i++;
+                j++;
+            } else if(j > 0){
+                while (true){
+                    j = lps[j-1];
+                    if(pattern.charAt(j) == pattern.charAt(i)){
+                        lps[i] = lps[j] + 1;
+                        i++;
+                        j++;
+                        break;
+                    }
+                    else if(j>0){
+                        continue;
+                    }
+                    else{
+                        lps[i] = 0;
+                        i++;
+                        break;
+                    }
+                }
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+        int result = 0;
+        for (int a:lps) {
+            result += a;
+        }
+        return result;
     }
 }
