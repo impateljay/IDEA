@@ -14,7 +14,7 @@ package Patterns;
  */
 public class Pattern5 {
     public static void main(String[] args) {
-        new Pattern5().draw(8);
+        new Pattern5().draw1(8);
     }
 
     private void draw(int max) {
@@ -26,6 +26,16 @@ public class Pattern5 {
                     System.out.print(" ");
             }
             System.out.println();
+        }
+    }
+
+    private void draw1(int max){
+        String s = new String(new char[max-1]).replace('\0', ' ');
+        s = s+'*';
+        System.out.println(s);
+        for (int i=0;i<max-1;i++){
+            s = s.substring(0,max-i-2) + '*'+s.substring(max-i-1);
+            System.out.println(s);
         }
     }
 }

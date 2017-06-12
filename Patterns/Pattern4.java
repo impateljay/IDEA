@@ -14,7 +14,7 @@ package Patterns;
  */
 public class Pattern4 {
     public static void main(String[] args) {
-        new Pattern4().draw(5);
+        new Pattern4().draw1(6);
     }
 
     private void draw(int max) {
@@ -39,6 +39,32 @@ public class Pattern4 {
             } else {
                 start++;
                 end--;
+            }
+        }
+    }
+
+    private void draw1(int max){
+        String s = new String(new char[max*2+1]).replace('\0', ' ');
+        int start = max;
+        int end = max-1;
+        s = s.substring(0,start-1)+'*'+s.substring(start+1);
+        System.out.println(s);
+        for (int i=0;i<max-1;i++){
+            start--;
+            end++;
+            if(start>=0 && end<=s.length()-1) {
+                s = s.substring(0, start - 1) + '*' + s.substring(start, end) + '*' + s.substring(end + 1);
+                System.out.println(s);
+            }
+        }
+        s = ' ' + s.substring(1,end)+' ';
+        System.out.println(s);
+        for (int i=0;i<max-1;i++){
+            start++;
+            end--;
+            if(start<max && end>max-1) {
+                s = s.substring(0, start - 1) + ' ' + s.substring(start, end) + ' ' + s.substring(end + 1);
+                System.out.println(s);
             }
         }
     }

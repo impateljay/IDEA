@@ -13,7 +13,7 @@ package Patterns;
  */
 public class Pattern3 {
     public static void main(String[] args) {
-        new Pattern3().draw(7);
+        new Pattern3().draw1(7);
     }
 
     private void draw(int max) {
@@ -30,6 +30,22 @@ public class Pattern3 {
             System.out.println();
             start--;
             end++;
+        }
+    }
+
+    private void draw1(int max){
+        String s = new String(new char[max*2+1]).replace('\0', ' ');
+        int start = max;
+        int end = max-1;
+        s = s.substring(0,start-1)+'*'+s.substring(start+1);
+        System.out.println(s);
+        for (int i=0;i<max-1;i++){
+            start--;
+            end++;
+            if(start>=0 && end<=s.length()-1) {
+                s = s.substring(0, start - 1) + '*' + s.substring(start, end) + '*' + s.substring(end + 1);
+                System.out.println(s);
+            }
         }
     }
 }
